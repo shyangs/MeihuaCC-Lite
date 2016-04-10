@@ -1,0 +1,37 @@
+{
+  "title": "MeihuaCC Lite",
+  "name": "MeihuaCC Lite",
+  "version": "1.0a13",
+  "description": "Meihua Chinese Converter, convert page between Simplified and Traditional Chinese.",
+  "main": "index.js",
+  "author": "shyangs",
+  "engines": {
+    "firefox": ">=38.0a1",
+    "fennec": ">=38.0a1"
+  },
+  "license": "GPLv2 or later versions",
+  "keywords": [
+    "jetpack"
+  ],
+	"preferences": [{
+    "label": "使用者設定",
+    "name": "options",
+    "title": "選項",
+    "type": "control"
+	},
+	{
+		"description": "Please select your preferred language.",
+		"name": "prefLang",
+		"title": "Preferred Language",
+		"type": "string",
+		"value": "zh-TW",
+		"hidden": true
+	},
+	{
+		"name": "firstRun",
+		"title": "First Run",
+		"type": "bool",
+		"value": true,
+		"hidden": true
+	}]
+}

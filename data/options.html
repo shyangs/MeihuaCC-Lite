@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+<link rel="stylesheet" href="thirdparty/pure-min.css" />
+<link rel="stylesheet" href="thirdparty/toggle-switch.css" />
+<link rel="stylesheet" href="thirdparty/basicModal.min.css" />
+<style type="text/css">
+input {
+  width: 100%;
+	height: 100%;
+}
+
+button {
+  width: 100%;
+}
+
+strong {
+	display: block;
+	text-align: center;
+}
+
+.center {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.fa {
+	cursor: pointer;
+	margin-left: 0.4rem;
+	margin-right: 0.4rem;
+}
+
+.switch-light {
+  width: 96%;
+	font-size: 72%;
+}
+
+#formAdd > div {
+	height: 1.8rem;
+	padding-left: 0.4rem;
+	padding-right: 0.4rem;
+}
+
+#formAdd {
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+}
+
+#formPrefLang {
+	margin-left: 1.8rem;
+}
+
+.pure-table {
+	width: 96%;
+	margin-top: 1.5rem;
+	text-align: left;
+}
+
+th:first-child, td:first-child {
+  width: 4rem;
+}
+
+th:last-child, td:last-child {
+  width: 4rem;
+}
+</style>
+</head>
+<body>
+<h2 class="center">MeihuaCC Lite</h2>
+
+<div id="formPrefLang" class="pure-g">
+	<fieldset class="pure-u-8-24">
+		<legend>Preferred Language</legend>
+		<div class="switch-toggle switch-candy">
+			<input id="radioCN" name="view-d-m" type="radio">
+			<label for="radioCN" onclick="">簡體</label>
+			<input id="radioTW" name="view-d-m" checked="" type="radio">
+			<label for="radioTW" onclick="">繁體</label>
+			<a></a>
+		</div>
+	</fieldset>
+</div>
+
+<table id="hacker-list" class="pure-table pure-table-bordered pure-table-striped center">
+<thead>
+<tr><th>Index</th><th>Name</th><th>Pattern (Regex)</th><th>行為</th><th class="center">功能</th></tr>
+</thead>
+<tbody class="list-container">
+</tbody>
+</table>
+
+<table style="display:none;">
+    <!-- A template element is needed when list is empty. -->
+    <tr id="hacker-item">
+       <td class="index"></td>
+       <td class="name"></td>
+			 <td class="pattern"></td>
+			 <td class="command"></td>
+			 <td class="function center"><i class="fa fa-trash-o fa-lg" title="Remove"></i><i class="fa fa-arrows-v fa-lg" title="Move to ..."></i></td>
+    </tr>
+</table>
+
+
+<div id="formAdd" class="pure-g">
+	<div class="pure-u-2-24">
+	</div>
+	<div class="pure-u-4-24">
+		<input id="inputName" placeholder="名稱" />
+	</div>
+	<div class="pure-u-7-24">
+		<input id="inputPattern" placeholder="網址樣式" />
+	</div>
+	<div class="pure-u-3-24">
+		<label class="switch-light switch-ios" onclick="">
+			<input id="inputCommand" type="checkbox" checked />
+			<strong>轉換</strong>
+			<span>
+				<span>OFF</span>
+				<span>ON</span>
+				<a></a>
+			</span>
+		</label>
+	</div>
+	<div class="pure-u-3-24">
+		<button id="btnAdd" type="button" class="pure-button">新增</button>
+	</div>
+</div>
+
+
+</body>
+</html>

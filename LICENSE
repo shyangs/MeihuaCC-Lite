@@ -1,0 +1,26 @@
+MeihuaCC Lite is a Firefox extension.
+Copyright (C) 2016 Yu-Hsiang LIN (shyangs)
+
+MeihuaCC Lite is Open Source, released under the terms of the GPLv2 or later versions;
+see the LICENSE.GPL file.
+This applies to all source code files.
+
+Individual files may have different licenses.
+
+MeihuaCC Lite contains code derived from 
+basicModal ( http://basicmodal.electerious.com/ ), reused under the terms of the MIT; see LICENSE.MIT.
+
+MeihuaCC Lite contains code derived from 
+CSS Toggle Switch ( https://ghinda.net/css-toggle-switch/ ), reused under the terms of the MIT; see LICENSE.MIT.
+
+MeihuaCC Lite contains code derived from 
+List.js ( http://www.listjs.com/ ), reused under the terms of the MIT; see LICENSE.MIT.
+
+MeihuaCC Lite contains code derived from 
+Pure.css ( http://purecss.io/ ), reused under the terms of the BSD; see LICENSE.BSD.
+
+MeihuaCC Lite contains code derived from 
+Remove Certificate Overrides ( https://github.com/buttercookie42/removecertoverrides ), reused under the terms of the MPL; see LICENSE.MPL.
+
+MeihuaCC Lite contains code derived from 
+New Tong Wen Tang for Firefox ( https://www.openfoundry.org/of/projects/333 ), reused under the terms of GPLv2 / MIT license; see LICENSE.GPL / LICENSE.MIT.
