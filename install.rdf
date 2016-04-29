@@ -5,7 +5,7 @@
           <em:type>2</em:type>
           <em:bootstrap>true</em:bootstrap>
           <em:unpack>false</em:unpack>
-          <em:version>1.0a13</em:version>
+          <em:version>1.0a14</em:version>
 					<em:iconURL>resource://meihuacclite-at-shyangs/data/icon-64.png</em:iconURL>
           <em:name>MeihuaCC Lite</em:name>
           <em:description>Meihua Chinese Converter, convert page between Simplified and Traditional Chinese.</em:description>

@@ -1,13 +1,11 @@
 'use strict';
 /* MeihuaCC Lite is licensed under GPLv2 or later versions. See the LICENSE file. */
 
-let { Ci } = require('chrome');
 let utils = require('sdk/window/utils');
 let activeBrowserWindow = utils.getMostRecentBrowserWindow();
 //var alert = activeBrowserWindow.alert;
 
 let tabs = require("sdk/tabs");
-let tab_utils = require("sdk/tabs/utils");
 let sp = require("sdk/simple-prefs");
 let prefs = sp.prefs;
 let self = require("sdk/self");
@@ -85,52 +83,47 @@ let addTable = function(table){
 		};
 };
 
+let gPref = function(prefName){
+	if( typeof(prefs[prefName]) === 'undefined' ){
+		switch(prefName){
+			case 'prefLang':
+				prefs[prefName] = ('zh-CN'===require("sdk/preferences/service").get('general.useragent.locale'))?'zh-CN':'zh-TW';
+				break;
+			case 'patterns_zh-CN':
+			case 'patterns_zh-TW':
+				let arr = ('zh-CN'===gPref('prefLang')?DEFAULT_PATTERN_CN:DEFAULT_PATTERN_TW).map(function(o, i){
+					return ({
+						index: i+1,
+						name: o.name||'',
+						pattern: o.pattern,
+						command: o.command||'include'
+					});
+				});
 
-let locale;
-if(prefs.firstRun){
-	locale = ('zh-CN'===require("sdk/preferences/service").get('general.useragent.locale'))?'zh-CN':'zh-TW';
-	prefs.prefLang = locale;
-	prefs.firstRun = false;
-}else{
-	locale = prefs.prefLang;
-}
+				prefs[prefName] = JSON.stringify(arr);
+				break;
+		}
+	}
 
-let DEFAULT_PATTERN;
+	return prefs[prefName];
+};
 
 let initTable = function(pattern, arrFileName){
-	DEFAULT_PATTERN = pattern;
-
 	oTables = {aMappings:[], maxPhLen:0};
 	arrFileName.forEach(function(json){
 		addTable(JSON.parse(self.data.load(json)));
 	});
 };
 
-let initRule = function(locale){
-	if('zh-CN'===locale){
+let initRule = function(prefLang){
+	if('zh-CN'===prefLang){
 		initTable(DEFAULT_PATTERN_CN, ['tw2cn_c.json', 'tw2cn_p.json']);
 	}else{
 		initTable(DEFAULT_PATTERN_TW, ['cn2tw_n.json', 'cn2tw_c.json', 'cn2tw_p.json']);
 	}
 };
 
-initRule(locale);
-
-let initPatternPrefs = function(){
-	let arr = DEFAULT_PATTERN.map(function(o, i){
-		return ({
-			index: i+1,
-			name: o.name||'',
-			pattern: o.pattern,
-			command: o.command||'include'
-		});
-	});
-	prefs.patterns = JSON.stringify(arr);
-};
-
-if(!prefs.patterns){
-	initPatternPrefs();
-}
+initRule(gPref('prefLang'));
 
 let pm = require("sdk/page-mod").PageMod({
   include: '*',
@@ -139,7 +132,7 @@ let pm = require("sdk/page-mod").PageMod({
 	],
   onAttach: function(worker){
 		let fUrlHandler = function(href){
-			let aRules = JSON.parse(prefs.patterns);
+			let aRules = JSON.parse( gPref('patterns_'+gPref('prefLang')) );
 			for(let i=0, len=aRules.length; i<len; i++){
 				let oRule = aRules[i], pattern = oRule.pattern, command = oRule.command, 
 					regexp = new RegExp(pattern, 'i');
@@ -173,20 +166,18 @@ let openOptionsTab = function(){
 				]
 			});
 			worker.port.on('eChangePrefLang', function(lang){
-				locale = lang;
-				prefs.prefLang = locale;
-				initRule(locale);
-				initPatternPrefs();
+				prefs.prefLang = lang;
+				initRule(lang);
 				worker.port.emit('eChangePrefLang');
 			});
 			worker.port.on("eRequestPrefLang", function(){
-				worker.port.emit('eResponsePrefLang', prefs.prefLang);
+				worker.port.emit('eResponsePrefLang', gPref('prefLang'));
 			});
 			worker.port.on("eRequestTableData", function(){
-				worker.port.emit('eResponseTableData', JSON.parse(prefs.patterns));
+				worker.port.emit('eResponseTableData', JSON.parse( gPref('patterns_'+gPref('prefLang')) ));
 			});
 			worker.port.on('eSaveStorage', function(tableData){
-				prefs.patterns = JSON.stringify(tableData);
+				prefs['patterns_'+gPref('prefLang')] = JSON.stringify(tableData);
 			});
 		}
 	});

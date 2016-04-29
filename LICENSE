@@ -24,3 +24,6 @@ Remove Certificate Overrides ( https://github.com/buttercookie42/removecertoverr
 
 MeihuaCC Lite contains code derived from 
 New Tong Wen Tang for Firefox ( https://www.openfoundry.org/of/projects/333 ), reused under the terms of GPLv2 / MIT license; see LICENSE.GPL / LICENSE.MIT.
+
+MeihuaCC Lite contains code derived from 
+Font Awesome ( http://fontawesome.io ), reused under the terms of the MIT; see LICENSE.MIT. The webfont file(fontawesome-webfont.woff2) is licensed under the SIL Open Font License; see LICENSE.OFL.
