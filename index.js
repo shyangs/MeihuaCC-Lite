@@ -54,7 +54,6 @@ const DEFAULT_PATTERN_TW = [
 ];
 
 const DEFAULT_PATTERN_CN = [
-	{pattern: '^about:', command: 'exclude'},
 	{pattern: '\\.cn/', command: 'exclude'},
 	{pattern: '^https?://cn\\.', command: 'exclude'},
 	{pattern: '\\.jp/', command: 'exclude'},
@@ -126,7 +125,7 @@ let initRule = function(prefLang){
 initRule(gPref('prefLang'));
 
 let pm = require("sdk/page-mod").PageMod({
-  include: '*',
+  include: /.*/,
   contentScriptFile: [
 		self.data.url('contentScript.js')
 	],
